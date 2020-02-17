@@ -13,4 +13,7 @@ git fetch upstream 获取远程分支
 git checkout master切换到主分支
 git merge upstream/master合并两个分支，也就是说将原作者项目的修改同步到自己这里
 git push origin master 以将合并的内容更新在自己的github上
+
+
 iadsfd
+测试操作fork提交代码
