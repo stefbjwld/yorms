@@ -1,0 +1,2 @@
+1.通过github进行fork代码地址
+2.登陆自己的github账号进行fork操作
