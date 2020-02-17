@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<style type="text/css">
+table {
+	border-collapse: separate;
+	border-spacing: 0px 10px;
+}
+
+.lefttd {
+	padding-right: 15px;
+}
+.margin-left {
+	margin-left: 15px;
+}
+</style> 
+</head>
+<body>
+	<h3 class="page-header">编辑用户组</h3>
+	
+	<div class="alert alert-danger hide">
+		<button class="close" type="button"  onclick="$('.alert.alert-danger').hide();">×</button>
+		<strong id="checkPromoteMessage">信息填写错误</strong> 
+	</div>
+	
+	<form id="groupEditForm" class="form-horizontal" th:object="${groupM}">
+		<input type="hidden" class="form-control"  name="id"  id="id" th:value="*{id}"/>
+		
+		<table>
+				<tbody>
+					<tr>
+						<td class="lefttd"><label for="groupName">用户组名</label></td>
+						<td>
+							<input type="text" class="form-control" name="groupName" id="groupName" th:value="*{groupName}"/>
+						</td>
+					</tr>
+					
+					<tr>
+						<td class="lefttd"><label for="repositoryDesc">用户组描述</label></td>
+						<td>
+							<input type="text" class="form-control" name="groupDesc" id="groupDesc" th:value="*{groupDesc}"/>
+						</td>
+					</tr>
+
+					<tr id = "sumit">
+						<td class="lefttd">
+							<input type="button" class="btn btn-info" value="保存"  th:onclick="groupEditSave([[${currentPage}]],[[${size}]])"/>
+						</td>
+						<td>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+	</form>
+</body>
+</html>

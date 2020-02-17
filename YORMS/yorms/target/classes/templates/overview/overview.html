@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<script type="text/javascript" th:src="@{/echarts3.7.2/echarts.js}"></script>
+<link rel="stylesheet" th:href="@{/css/overview.css}"></link>
+</head>
+<body>
+	<h3 class="page-header">运维风险视图</h3>
+	
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 ">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">工作监督</h3>
+				</div>
+				<div class="panel-body" id="workOverview"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row">
+		
+		<div class="col-xs-6 col-sm-6 ">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">运维风险状态雷达视图</h3>
+				</div>
+				<div class="panel-body" id="orsRadarView"></div>
+			</div>
+		</div>
+		
+		<div class="col-xs-6 col-sm-6 ">
+			<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">业务系统运行状态</h3>
+				</div>
+				<div class="panel-body" id="businessStatus"></div>
+			</div>
+		
+		</div>
+	</div>
+	
+
+
+</body>
+<script type="text/javascript" th:src="@{/js/overview.js}"></script>
+</html>

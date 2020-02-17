@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<style type="text/css">
+table {
+	border-collapse: separate;
+	border-spacing: 0px 10px;
+}
+
+.lefttd {
+	padding-right: 15px;
+}
+.margin-left {
+	margin-left: 15px;
+}
+</style>
+</head>
+<body>
+	<h3 class="page-header">编辑用户</h3>
+	<div class="alert alert-danger hide">
+		<button class="close" type="button"  onclick="$('.alert.alert-danger').hide();">×</button>
+		<strong id="checkPromoteMessage">信息填写错误</strong> 
+	</div>
+	<form id="userEditForm" class="form-horizontal" th:object="${user}" >
+		<input type="hidden" class="form-control"  name="id"  id="id" th:value="*{id}"/>
+		<table>
+			<tbody id="userEditTbody">
+				<tr>
+					<td class="lefttd"><label for="userName">用户名</label></td>
+					<td><input type="text" readonly="readonly" class="form-control" name="userName" id="userName" th:value="*{userName}"/></td>
+				</tr>
+				<tr>
+					<td class="lefttd"><label for="company">单位</label></td>
+					<td><input type="text" class="form-control" name="company" id="company" th:value="*{company}"/></td>
+				</tr>
+				<tr>
+					<td class="lefttd"><label for="userDesc">用户描述</label></td>
+					<td><input type="text" class="form-control" name="userDesc" id="userDesc" th:value="*{userDesc}"/></td>
+				</tr>
+				<tr>
+					<td class="lefttd"><label for="enable">启用状态</label></td>
+					<td><select class="form-control" name="enable" id="enable">
+							<option value="enabled" th:selected="*{enable.equals('enabled')}? 'seclected'">启用</option>
+							<option value="disabled" th:selected="*{enable.equals('disabled')}? 'seclected'">停用</option>
+						</select></td>
+				</tr>
+				
+				<th:block th:each="groups,groupsStat: ${user.groups}">
+					<tr th:id="${groupsStat.count==1}?'groupRowDom' : ''">
+						<td class="lefttd"><label for="groups" th:text="${groupsStat.count==1}?'用户组' : '附加组'">附加组</label></td>
+						<td><div th:include="commonModule/groupSelector :: groupSelector(${groups.id},${groupsStat.count},'')"></div></td>
+						<td><button type="button" th:class="${groupsStat.count==1}?'btn btn-info btn-xs margin-left' : 'btn btn-danger btn-xs margin-left'" th:onclick="${groupsStat.count==1}?'addAuxiliaryGroup()' : 'delAuxiliaryGroup(this)'" th:text="${groupsStat.count==1}?'附加组' : '删除'"></button></td>
+					</tr>
+				</th:block>
+				
+				<th:block th:each="roles,rolesStat: ${user.authorities}">
+					<tr th:id="${rolesStat.count==1}?'roleRowDom' : ''">
+						<td class="lefttd"><label for="roles" th:text="${rolesStat.count==1}?'主角色' : '附加角色'">附加角色</label></td>
+						<td><div th:include="commonModule/roleSelector :: roleSelector(${roles.id},${rolesStat.count},'')"></div></td>
+						<td><button type="button" th:class="${rolesStat.count==1}?'btn btn-info btn-xs margin-left' : 'btn btn-danger btn-xs margin-left'" th:onclick="${rolesStat.count==1}?'addAuxiliaryRole()' : 'delAuxiliaryRole(this)'" th:text="${rolesStat.count==1}?'附加角色' : '删除'"></button></td>
+					</tr>
+				</th:block>
+				
+				<tr id = "sumit">
+					<td class="lefttd">
+						<input type="button" class="btn btn-info" value="保存" th:onclick="userEditSave([[${currentPage}]],[[${size}]])" />
+					</td>
+					<td>
+						<button class="btn btn-info">重置用户密码</button>
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+
+	</form>
+</body>
+</html>

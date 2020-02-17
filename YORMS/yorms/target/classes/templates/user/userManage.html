@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<style type="text/css">
+.tableFilter {
+	border-collapse: separate;
+	border-spacing: 0px 10px;
+}
+
+.lefttd {
+	padding-right: 15px;
+}
+.margin-left {
+	margin-left: 15px;
+}
+</style>
+</head>
+<body>
+	<h3 class="page-header">用户管理</h3>
+	<div>
+		<form id="userFilterForm" class="form-horizontal">
+		<table class="tableFilter">
+			<tr>
+				<td class="lefttd"><label for="group">用户组</label></td>
+				<td class="lefttd"><div th:include="commonModule/groupSelector :: groupSelector(${#objects.nullSafe(groupIdFilterCriteria,'ALL')},'',${#objects.nullSafe(pageFunction,'')})"></div></td>
+				<td class="lefttd"><label for="role">角色</label></td>
+				<td class="lefttd"><div th:include="commonModule/roleSelector :: roleSelector(${#objects.nullSafe(roleIdFilterCriteria,'ALL')},'',${#objects.nullSafe(pageFunction,'')})"></div></td>
+				<td class="lefttd"><label for="enable">启用状态</label></td>
+				<td class="lefttd">
+					<select class="form-control" name="enable" id="enable">
+						<option value="" th:selected="${#objects.nullSafe(enableFilterCriteria,'ALL').equals('ALL')}? 'seclected'">所有</option>
+						<option value="enabled" th:selected="${#objects.nullSafe(enableFilterCriteria,'ALL').equals('enabled')}? 'seclected'">启用</option>
+						<option value="disabled" th:selected="${#objects.nullSafe(enableFilterCriteria,'ALL').equals('disabled')}? 'seclected'">停用</option>
+					</select>
+				</td>
+				<td class="lefttd">
+					<button type="button" class="btn btn-info" onclick="userFilter()"><span class="glyphicon glyphicon-search">&nbsp;</span>筛选用户</button>
+				</td>
+				<td class="lefttd">
+					<button type="button" class="btn btn-info" onclick="userAdd()"><span class="glyphicon glyphicon-plus">&nbsp;</span>新增用户</button>
+				</td>
+			</tr>
+		</table>
+		</form>
+	</div>
+
+    <h4 class="page-header">用户列表</h4>
+    <div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>用户名</th>
+					<th>密码</th>
+					<th>用户描述</th>
+					<th>是否启用</th>
+					<th>单位</th>
+					<th>用户组</th>
+					<th>角色</th>
+					<th>编辑</th>
+					<th>删除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="user : ${users}">
+					<td scope="row" th:text="${user.id}">id</td>
+					<td th:text="${user.userName}">user</td>
+					<td th:text="${user.password}">1qaz@WSX</td>
+					<td th:text="${user.userDesc}">普通账户</td>
+					<td th:text="${user.enable}">启用</td>
+					<td th:text="${user.company}">2营</td>
+					<td><div th:each="group:${user.groups}"><span th:text="${group.groupName}"></span></div></td>
+					<td><div th:each="authority:${user.authorities}"><span th:text="${authority.authorityName}"></span></div></td>
+					<td><button type="button" class="btn btn-info btn-xs" th:href="@{/user/userEdit(id=${user.id},currentPage=${currentPage},size=${size})}" th:onclick="userEdit(this)">编辑</button></td>
+					<td><button type="button" class="btn btn-danger btn-xs" th:href="@{/user/userDel(id=${user.id},page=${currentPage},size=${size})}" th:onclick="userDel(this)">删除</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:include="commonModule/page :: page(${#objects.nullSafe(pageFunction,'/user/userManage')})"></div>
+	
+	<div class="modal" id="deleteAlertModal" style="display: none;">
+		<div class="modal-dialog deleteAlertModal-dialog-custom">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">提示</h4>
+				</div>
+				<div class="modal-body"><p>确认删除该用户？</p></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-xs" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-xs" id="deleteConfirmBtn">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

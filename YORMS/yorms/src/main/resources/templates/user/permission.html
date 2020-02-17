@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<script type="text/javascript" th:src="@{/js/user.js}"></script>
+	<script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
+</head>
+<body>
+
+	<h3 class="page-header">权限管理</h3>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+		<h4 class="panel-title">操作菜单</h4>
+		</div>
+		<div class="panel-body">
+			<button type="button" class="btn btn-info" onclick="showUserManage()">用户管理</button>
+			<button type="button" class="btn btn-info" onclick="showGroupManage()">用户组管理</button>
+			<button type="button" class="btn btn-info" onclick="showRoleManage()">角色管理</button>
+		</div>
+	</div>
+
+</body>
+</html>

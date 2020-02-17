@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+	<h3 class="page-header">角色管理</h3>
+	<button type="button" class="btn btn-info" onclick="roleAdd()"><span class="glyphicon glyphicon-plus">&nbsp;</span>新增角色</button>
+    <br/>
+    <br/>
+    <h4 class="page-header">角色列表</h4>
+    <div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>角色名</th>
+					<th>角色描述</th>
+					<th>编辑</th>
+					<th>删除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="authority : ${authorities}">
+					<td scope="row" th:text="${authority.id}">id</td>
+					<td th:text="${authority.authorityName}">系统管理员</td>
+					<td th:text="${authority.authorityDesc}">系统管理员</td>
+					<td><button type="button" class="btn btn-info btn-xs" th:href="@{/user/roleEdit(id=${authority.id},currentPage=${currentPage},size=${size})}" th:onclick="roleEdit(this)">编辑</button></td>
+					<td><button type="button" class="btn btn-danger btn-xs" th:href="@{/user/roleDel(id=${authority.id})}" th:onclick="roleDel(this)">删除</button></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div th:include="commonModule/page :: page('/user/roleManage')"></div>
+	
+	<div class="modal" id="deleteAlertModal" style="display: none;">
+		<div class="modal-dialog deleteAlertModal-dialog-custom">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 class="modal-title">提示</h4>
+				</div>
+				<div class="modal-body"><p>确认删除该角色？</p></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-xs" data-dismiss="modal">取消</button>
+					<button type="button" class="btn btn-primary btn-xs" id="deleteConfirmBtn">确认</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>

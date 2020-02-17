@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<style type="text/css">
+table {
+	border-collapse: separate;
+	border-spacing: 0px 10px;
+}
+
+.lefttd {
+	padding-right: 15px;
+}
+.margin-left {
+	margin-left: 15px;
+}
+</style> 
+</head>
+<body>
+	<h3 class="page-header">编辑角色</h3>
+	
+	<div class="alert alert-danger hide">
+		<button class="close" type="button"  onclick="$('.alert.alert-danger').hide();">×</button>
+		<strong id="checkPromoteMessage">信息填写错误</strong> 
+	</div>
+	
+	<form id="authorityEditForm" class="form-horizontal" th:object="${authority}">
+	<input type="hidden" class="form-control"  name="id"  id="id" th:value="*{id}"/>
+		
+		<table>
+				<tbody>
+					<tr>
+						<td class="lefttd"><label for="authorityName">角色名</label></td>
+						<td>
+							<input type="text" class="form-control" name="authorityName" id="authorityName" th:value="*{authorityName}"/>
+						</td>
+					</tr>
+					
+					<tr>
+						<td class="lefttd"><label for="repositoryDesc">角色描述</label></td>
+						<td>
+							 <input type="text" class="form-control" name="authorityDesc" id="authorityDesc" th:value="*{authorityDesc}"/>
+						</td>
+					</tr>
+
+					<tr id = "sumit">
+						<td class="lefttd">
+							<input type="button" class="btn btn-info" value="保存"  th:onclick="roleEditSave([[${currentPage}]],[[${size}]])"/>
+						</td>
+						<td>
+						</td>
+					</tr>
+				</tbody>
+		</table>
+	</form>
+</body>
+</html>

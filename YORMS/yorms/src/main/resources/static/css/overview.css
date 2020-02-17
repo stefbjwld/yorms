@@ -1,0 +1,15 @@
+@charset "UTF-8";
+#workOverview{
+	height: 250px;
+	padding: 5px;
+}
+#orsRadarView{
+	width: 450px;
+	height: 250px;
+	padding: 5px;
+}
+#businessStatus{
+	width: 450px;
+	height: 250px;
+	padding: 5px;
+}

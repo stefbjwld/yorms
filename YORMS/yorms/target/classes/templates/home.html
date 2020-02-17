@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+<meta charset="utf-8">
+<meta name="description" content="">
+<meta name="author" content="">
+<link href="../../favicon.ico" rel="icon">
+<title>物资管理</title>
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet"
+	th:href="@{/bootstrap-3.3.7-dist/css/bootstrap.css}" />
+<!-- Custom styles for this template -->
+<link th:href="@{css/dashboard.css}" rel="stylesheet">
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button class="navbar-toggle collapsed" aria-expanded="false"
+					aria-controls="navbar" type="button" data-toggle="collapse"
+					data-target="#navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#"><span class="glyphicon glyphicon-th-list">&nbsp;</span>运维风险管理平台</a>
+			</div>
+			<div class="navbar-collapse collapse" id="navbar">
+				<ul class="nav navbar-nav navbar-right">
+					<li>
+						<a sec:authorize="isAuthenticated()" id="profile" href="#">
+							<span class="glyphicon glyphicon-user">&nbsp;</span><span sec:authentication="name">Profile</span>
+						</a>
+					</li>
+					<li sec:authorize="isAuthenticated()">
+						<a id="logout" href="/logout">退出</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-3 col-md-2 sidebar">
+				<ul class="nav nav-sidebar">
+					<li><a href="#tab1"><span class="glyphicon glyphicon-home">&nbsp;</span>风险管理总视图<span class="sr-only">(current)</span></a></li>
+					<li><a href="#tab2"><span class="glyphicon glyphicon-eye-open">&nbsp;</span>风险识别</a></li>
+					<li><a href="#tab3"><span class="glyphicon glyphicon-question-sign">&nbsp;</span>问题管理</a></li>
+					<li><a href="#tab4"><span class="glyphicon glyphicon-tasks">&nbsp;</span>处置与整改任务管理</a></li>
+					<li><a href="#tab5"><span class="glyphicon glyphicon-book" >&nbsp;</span>政策法规制度</a></li>
+					<li><a href="#tab6"><span class="glyphicon glyphicon-th-large">&nbsp;</span>组织机构管理</a></li>
+					<li><a href="#tab7"><span class="glyphicon glyphicon-user">&nbsp;</span>权限管理</a></li>
+				</ul>
+			</div>
+			<div class="tab-content">
+				<div id="tab1"
+					class="tab-pane col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				</div>
+
+				<div id="tab2"
+					class="tab-pane col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				</div>
+
+				<div id="tab3" class="tab-pane col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				</div>
+
+				<div id="tab4"
+					class="tab-pane col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				</div>
+
+				<div id="tab5"
+					class="tab-pane col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				</div>
+
+				<div id="tab6"
+					class="tab-pane col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				</div>
+				
+				<div id="tab7"
+					class="tab-pane col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				</div>
+				
+				<div id="tab8"
+					class="tab-pane col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div class="modal" id="userprofile" style="display: none;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" data-dismiss="modal">×</button>
+					<h3>用户信息</h3>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+
+
+	<!-- Bootstrap core JavaScript================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+	<!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> -->
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/home.js}"></script>
+</body>
+</html>
