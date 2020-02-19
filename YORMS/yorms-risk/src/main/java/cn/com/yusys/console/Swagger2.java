@@ -1,4 +1,4 @@
-package cn.springcloud.meisw.eureka;
+package cn.com.yusys.console;
 
 import java.util.ArrayList;
 import java.util.List;

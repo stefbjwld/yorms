@@ -1,4 +1,4 @@
-package cn.springcloud.meisw.eureka;
+package cn.com.yusys.console;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,9 +9,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-public class MeiswDemo1Application {
+public class RiskApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(MeiswDemo1Application.class, args);
+        SpringApplication.run(RiskApplication.class, args);
     }
 }

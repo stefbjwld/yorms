@@ -20,7 +20,7 @@
 
 	<modules>
 		<module>yorms</module>
-		<module>eureka</module>
+		<module>yorms-risk</module>
 		<module>yorms-activity</module>
 	</modules>
 
