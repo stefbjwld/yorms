@@ -1,0 +1,29 @@
+server:
+  port: 9003
+spring:
+  application:
+    name: yorms-risk
+    host: localhost
+  cloud:
+    consul:
+      discovery:
+        service-name: yorms-risk
+        register: true
+        healthCheckPath: /actuator/health
+        instanceId: ${spring.application.name}:${spring.application.host}
+      host: localhost
+      port: 8500
+      config:
+        enabled: true
+        format: yaml
+        data-key: yorms
+        prefix: config
+        defaultContext: consul-config
+  datasource:
+    jdbc-url: jdbc:mysql://192.168.60.137.:3306/activiti?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=true
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+
+
