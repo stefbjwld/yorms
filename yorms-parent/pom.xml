@@ -77,10 +77,11 @@
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 
-		<dependency>
+		<!-- 部分会导致端口被占用问题 -->
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
-		</dependency>
+		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
 		<dependency>
