@@ -15,7 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import cn.com.yusys.file.util.HDFSUtil;
+import cn.com.yusys.file.service.HdfsService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -23,17 +23,17 @@ import cn.com.yusys.file.util.HDFSUtil;
 public class HDFSTest {
 	
 	@Autowired
-	private HDFSUtil hdfsUtil;
+	private HdfsService hdfsService;
 	
 	/**
 	 * 测试创建HDFS目录
 	 */
 	@Test
 	public void testMkdir() {
-		boolean result1 = hdfsUtil.mkdir("/testDir");
+		boolean result1 = hdfsService.mkdir("/testDir");
 		System.out.println("创建结果：" + result1);
 		
-		boolean result2 = hdfsUtil.mkdir("/testDir/subDir");
+		boolean result2 = hdfsService.mkdir("/testDir/subDir");
 		System.out.println("创建结果：" + result2);
 	}
 	
@@ -43,10 +43,10 @@ public class HDFSTest {
 	@Test
 	public void testUploadFile() {
 		// 测试上传三个文件
-		hdfsUtil.uploadFileToHdfs("C:\\Users\\Administrator\\Pictures\\2.jpg", "/testDir");
-		hdfsUtil.uploadFileToHdfs("C:\\Users\\Administrator\\Pictures\\3.jpg", "/testDir");
+		hdfsService.uploadFileToHdfs("C:\\Users\\Administrator\\Pictures\\2.jpg", "/testDir");
+		hdfsService.uploadFileToHdfs("C:\\Users\\Administrator\\Pictures\\3.jpg", "/testDir");
 		
-		hdfsUtil.uploadFileToHdfs("C:\\Users\\Administrator\\Pictures\\4.jpg", "/testDir/subDir");
+		hdfsService.uploadFileToHdfs("C:\\Users\\Administrator\\Pictures\\4.jpg", "/testDir/subDir");
 	}
 	
 	/**
@@ -54,7 +54,7 @@ public class HDFSTest {
 	 */
 	@Test
 	public void testListFiles() {
-		List<Map<String, Object>> result = hdfsUtil.listFiles("/testDir", null);
+		List<Map<String, Object>> result = hdfsService.listFiles("/testDir", null);
 		
 		result.forEach(fileMap -> {
 			fileMap.forEach((key, value) -> {
@@ -69,7 +69,7 @@ public class HDFSTest {
 	 */
 	@Test
 	public void testDownloadFile() {
-		hdfsUtil.downloadFileFromHdfs("/testDir/a.txt", "C:/Users/yanglei/Desktop/test111.txt");
+		hdfsService.downloadFileFromHdfs("/testDir/2.jpg", "F:\\");
 	}
 	
 	/**
@@ -77,7 +77,7 @@ public class HDFSTest {
 	 */
 	@Test
 	public void testOpen() throws IOException {
-		FSDataInputStream inputStream = hdfsUtil.open("/testDir/a.txt");
+		FSDataInputStream inputStream = hdfsService.open("/testDir/a.txt");
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
 		String line = null;
@@ -89,20 +89,11 @@ public class HDFSTest {
 	}
 	
 	/**
-	 * 测试打开HDFS上面的文件，并转化为Java对象 //
-	 */
-	// @Test
-	// public void testOpenWithObject() throws IOException {
-	// SysUserEntity user = hdfsService.openWithObject("/testDir/b.txt", SysUserEntity.class);
-	// System.out.println(user);
-	// }
-	
-	/**
 	 * 测试重命名
 	 */
 	@Test
 	public void testRename() {
-		hdfsUtil.rename("/testDir/b.txt", "/testDir/b_new.txt");
+		hdfsService.rename("/testDir/b.txt", "/testDir/b_new.txt");
 		
 		// 再次遍历
 		testListFiles();
@@ -113,7 +104,7 @@ public class HDFSTest {
 	 */
 	@Test
 	public void testDelete() {
-		hdfsUtil.delete("/testDir/b_new.txt");
+		hdfsService.delete("/testDir/b_new.txt");
 		
 		// 再次遍历
 		testListFiles();
@@ -124,7 +115,7 @@ public class HDFSTest {
 	 */
 	@Test
 	public void testGetFileBlockLocations() throws IOException {
-		BlockLocation[] locations = hdfsUtil.getFileBlockLocations("/testDir/a.txt");
+		BlockLocation[] locations = hdfsService.getFileBlockLocations("/testDir/a.txt");
 		
 		if (locations != null && locations.length > 0) {
 			for (BlockLocation location : locations) {

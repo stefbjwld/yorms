@@ -32,6 +32,9 @@ public class RegulationTypeRequest implements Serializable {
 	@ApiModelProperty(value = "制度一级分类编码 00001：外规，00002：内规", required = false)
 	private String typeTreeCode;
 	
+	@ApiModelProperty(value = "附件上传HDFS路径地址", required = false)
+	private String imgPath;
+	
 	public int getId() {
 		return id;
 	}
@@ -70,6 +73,14 @@ public class RegulationTypeRequest implements Serializable {
 	
 	public void setTypeTreeCode(String typeTreeCode) {
 		this.typeTreeCode = typeTreeCode;
+	}
+	
+	public String getImgPath() {
+		return imgPath;
+	}
+	
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 	
 }

@@ -17,6 +17,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+/**
+ * 单机版的WEB应用文件服务器
+ * @author Administrator
+ *
+ */
 @Controller
 @Api(description = "文件上传操作")
 public class FileUploadController {

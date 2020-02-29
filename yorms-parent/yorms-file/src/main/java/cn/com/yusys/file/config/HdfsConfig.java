@@ -3,17 +3,16 @@ package cn.com.yusys.file.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import cn.com.yusys.file.util.HDFSUtil;
+import cn.com.yusys.file.service.HdfsService;
 
 @Configuration
-public class HDFSConfig {
-	
-	private String defaultHdfsUri = "hdfs://172.25.0.2:50070"; // hdfs://172.25.0.2:50070
+public class HdfsConfig {
+    private String defaultHdfsUri = "hdfs://127.0.0.1:9000";
 
     @Bean
-    public HDFSUtil getHbaseService(){
+    public HdfsService getHbaseService(){
         org.apache.hadoop.conf.Configuration conf = new org.apache.hadoop.conf.Configuration();
         conf.set("fs.defaultFS",defaultHdfsUri);
-        return new HDFSUtil(conf,defaultHdfsUri);
+        return new HdfsService(conf,defaultHdfsUri);
     }
 }

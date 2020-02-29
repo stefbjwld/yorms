@@ -70,6 +70,12 @@ public class RegulatPolic implements Serializable {
 	@Column(name = "date")
 	private Date date;
 	
+	/**
+	 * 上传附件到HDFS的相对路径
+	 */
+	@Column(name = "img_path")
+	private String imgPath;
+	
 	public int getId() {
 		return id;
 	}
@@ -132,6 +138,14 @@ public class RegulatPolic implements Serializable {
 	
 	public void setDate(Date date) {
 		this.date = date;
+	}
+	
+	public String getImgPath() {
+		return imgPath;
+	}
+	
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
 	}
 	
 }
