@@ -22,6 +22,8 @@
 		<module>yorms</module>
 		<module>yorms-risk</module>
 		<module>yorms-activity</module>
+		<module>yorms-file</module>
+		<module>yorms-common</module>
 	</modules>
 
 	<dependencies>
@@ -40,11 +42,11 @@
 		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-thymeleaf -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 			<version>2.0.8.RELEASE</version>
-		</dependency>
+		</dependency> -->
 		<!-- consul注册中心 -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -58,24 +60,15 @@
 			<artifactId>spring-cloud-starter-consul-config</artifactId>
 			<version>2.0.2.RELEASE</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/org.thymeleaf.extras/thymeleaf-extras-springsecurity5 -->
-		<!-- <dependency>
-			<groupId>org.thymeleaf.extras</groupId>
-			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
-			<version>3.0.4.RELEASE</version>
 		</dependency> -->
 
-
-
-		<dependency>
+		<!-- <dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
+		</dependency> -->
 
 		<!-- 部分会导致端口被占用问题 -->
 		<!-- <dependency>
@@ -84,20 +77,20 @@
 		</dependency> -->
 
 		<!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
 			<version>1.2.47</version>
-		</dependency>
+		</dependency> -->
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.8</version>
-		</dependency>
+		</dependency> -->
 
 	</dependencies>
-	<build>
+	<!-- <build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -108,5 +101,5 @@
 				<artifactId>maven-deploy-plugin</artifactId>
 			</plugin>
 		</plugins>
-	</build>
+	</build> -->
 </project>

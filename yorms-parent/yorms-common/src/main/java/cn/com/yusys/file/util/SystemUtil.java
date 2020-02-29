@@ -1,3 +1,4 @@
+package cn.com.yusys.file.util;
 //package cn.springcloud.meisw.eureka.util;
 //
 //import java.io.BufferedReader;

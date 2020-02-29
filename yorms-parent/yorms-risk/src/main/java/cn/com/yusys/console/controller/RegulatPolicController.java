@@ -24,8 +24,8 @@ import org.springframework.web.bind.annotation.RestController;
 import cn.com.yusys.console.dto.RegulatPolicRequest;
 import cn.com.yusys.console.po.RegulatPolic;
 import cn.com.yusys.console.service.RegulatPolicService;
-import cn.com.yusys.console.util.OutputData;
-import cn.com.yusys.console.util.RiskException;
+import cn.com.yusys.file.util.OutputData;
+import cn.com.yusys.file.util.RiskException;
 
 /**
  * 政策制度管理

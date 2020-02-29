@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 import cn.com.yusys.console.dao.RegulationTypeDao;
 import cn.com.yusys.console.po.RegulationType;
 import cn.com.yusys.console.service.RegulationTypeService;
-import cn.com.yusys.console.util.RiskException;
+import cn.com.yusys.file.util.OutputData;
+import cn.com.yusys.file.util.RiskException;
 
 
 @Service
@@ -17,9 +18,18 @@ public class RegulationTypeServiceImpl implements RegulationTypeService {
 	@Autowired
 	private RegulationTypeDao regulationTypeDao;
 	
-	@Override
-	public void add(RegulationType rt) throws RiskException {
-		regulationTypeDao.saveAndFlush(rt);
+	@SuppressWarnings("rawtypes")
+    @Override
+	public OutputData add(RegulationType rt) throws RiskException {
+		OutputData out = new OutputData().returnSuccess();
+		/**判断二级分类名称是否存在,区分一级分类*/
+		List<RegulationType> list = regulationTypeDao.queryByTypeTreeCodeAndTypeName(rt.getTypeTreeCode(), rt.getTypeName());
+		if(list.isEmpty()){
+			regulationTypeDao.saveAndFlush(rt);
+		}else{
+			out.returnFail("二级分类名称已经存在!");
+		}
+		return out;
 	}
 	
 	@Override

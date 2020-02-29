@@ -1,4 +1,4 @@
-package cn.com.yusys.console.util;
+package cn.com.yusys.file.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

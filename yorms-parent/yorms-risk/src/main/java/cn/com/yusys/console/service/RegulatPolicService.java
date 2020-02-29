@@ -6,7 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import cn.com.yusys.console.po.RegulatPolic;
-import cn.com.yusys.console.util.RiskException;
+import cn.com.yusys.file.util.RiskException;
 
 
 public interface RegulatPolicService {

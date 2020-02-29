@@ -8,7 +8,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.com.yusys</groupId>
-	<artifactId>yorms-risk</artifactId>
+	<artifactId>yorms-file</artifactId>
 	<version>1.0.1</version>
 	<packaging>jar</packaging>
 	<properties>
@@ -38,21 +38,17 @@
 			</exclusions>
 		</dependency>
 		<!-- consul注册中心 -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-consul-discovery</artifactId>
 			<version>2.0.2.RELEASE</version>
-		</dependency> -->
+		</dependency>
 
 		<!-- consul配置中心 -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-consul-config</artifactId>
 			<version>2.0.2.RELEASE</version>
-		</dependency> -->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -65,12 +61,11 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+		<!-- thymeleaf模板插件 -->
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>
@@ -87,10 +82,32 @@
 			<version>2.5</version>
 		</dependency>
 		
+		<!-- HDFS -->
 		<dependency>
-			<groupId>cn.com.yusys</groupId>
-			<artifactId>yorms-common</artifactId>
-			<version>1.0.1</version>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-common</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-hdfs</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-hdfs-client</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-annotations</artifactId>
+			<version>3.1.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+			<version>1.2.58</version>
 		</dependency>
 	</dependencies>
 

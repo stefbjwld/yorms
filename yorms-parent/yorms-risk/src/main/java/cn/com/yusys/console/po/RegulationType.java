@@ -24,10 +24,28 @@ public class RegulationType implements Serializable{
 	private int id;
 	
 	/**
-	 * 制度分类名称
+	 * 制度二级分类名称
 	 */
 	@Column(name = "type_name")
-	private int typeName;
+	private String typeName;
+
+	/**
+	 * 制度二级分类编码
+	 */
+	@Column(name = "type_code")
+	private String typeCode;
+	
+	/**
+	 * 制度一级分类名称 :内规和外规
+	 */
+	@Column(name = "type_tree_name")
+	private String typeTreeName;
+	
+	/**
+	 * 制度一级分类编码 :00001：外规，00002：内规
+	 */
+	@Column(name = "type_tree_code")
+	private String typeTreeCode;
 
 	
     public int getId() {
@@ -40,19 +58,43 @@ public class RegulationType implements Serializable{
     }
 
 	
-    public int getTypeName() {
+    public String getTypeName() {
     	return typeName;
     }
 
 	
-    public void setTypeName(int typeName) {
+    public void setTypeName(String typeName) {
     	this.typeName = typeName;
     }
 
+	
+    public String getTypeCode() {
+    	return typeCode;
+    }
 
-	@Override
-    public String toString() {
-	    return "RegulationType [id=" + id + ", typeName=" + typeName + "]";
+	
+    public void setTypeCode(String typeCode) {
+    	this.typeCode = typeCode;
+    }
+
+	
+    public String getTypeTreeName() {
+    	return typeTreeName;
+    }
+
+	
+    public void setTypeTreeName(String typeTreeName) {
+    	this.typeTreeName = typeTreeName;
+    }
+
+	
+    public String getTypeTreeCode() {
+    	return typeTreeCode;
+    }
+
+	
+    public void setTypeTreeCode(String typeTreeCode) {
+    	this.typeTreeCode = typeTreeCode;
     }
 	
 	

@@ -1,4 +1,4 @@
-package cn.com.yusys.console.util;
+package cn.com.yusys.file.util;
 
 import java.util.List;
 
