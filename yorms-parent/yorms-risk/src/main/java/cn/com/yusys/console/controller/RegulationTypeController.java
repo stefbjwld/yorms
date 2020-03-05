@@ -50,7 +50,7 @@ public class RegulationTypeController {
             	return out.returnFail(e.getMessage());
             }
 			/**参数校验*/
-			if(!Constants.TYPETREECODE_W.equals(request.getTypeTreeCode()) && Constants.TYPETREECODE_N.equals(request.getTypeTreeCode())){
+			if(!Constants.TYPETREECODE_W.equals(request.getTypeTreeCode()) && !Constants.TYPETREECODE_N.equals(request.getTypeTreeCode())){
 				out.returnFail("政策制度分类一级编码有误!");
 				return out;
 			}
@@ -90,6 +90,51 @@ public class RegulationTypeController {
 			map.put(Constants.TYPETREECODE_W, wList);
 			map.put(Constants.TYPETREECODE_N, nList);
 			out.setData(map);
+		}catch(RiskException e){
+			log.info("添加政策制度分类服务异常：{}",e);
+			out.returnFail(e.getMessage());
+		}
+		return out;
+	}
+	
+	@SuppressWarnings({"rawtypes", "unchecked"})
+    @RequestMapping(value = "/queryTreeAll",method = RequestMethod.GET)
+	@ApiOperation(value = "/queryAll",notes = "查询所有政策制度分类")
+	public OutputData queryTreeAll(){
+		OutputData out = new OutputData().returnSuccess();
+		List<Object> list = new ArrayList<Object>();
+		List<Object> wList = new ArrayList<Object>();
+		List<Object> nList = new ArrayList<Object>();
+		
+		Map<String,Object> wMap = new HashMap<String,Object>();
+		wMap.put("value", Constants.TYPETREECODE_W);
+		wMap.put("label", Constants.TYPETREECODE_W);
+		
+		Map<String,Object> nMap = new HashMap<String,Object>();
+		nMap.put("value", Constants.TYPETREECODE_N);
+		nMap.put("label", Constants.TYPETREECODE_N);
+		
+		Map<String,Object> map = null;
+		try{
+			List<RegulationType> result = regulationTypeService.queryAll();
+			for(RegulationType type: result){
+				map = new HashMap<String,Object>();
+				map.put("id", type.getId());
+				map.put("lable", type.getTypeName());
+				map.put("value", type.getTypeCode());
+				if(Constants.TYPETREECODE_W.equals(type.getTypeTreeCode())){
+					wList.add(map);
+//					wList.add(type);
+				}else{
+					nList.add(map);
+//					nList.add(type);
+				}
+			}
+			wMap.put("children", wList);
+			nMap.put("children", nList);
+			list.add(wMap);
+			list.add(nMap);
+			out.setData(list);
 		}catch(RiskException e){
 			log.info("添加政策制度分类服务异常：{}",e);
 			out.returnFail(e.getMessage());
