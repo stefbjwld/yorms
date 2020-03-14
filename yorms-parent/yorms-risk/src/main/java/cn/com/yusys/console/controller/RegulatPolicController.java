@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiParam;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -21,7 +23,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import cn.com.yusys.console.dto.RegulatPolicRequest;
+import cn.com.yusys.console.dto.regulatPolic.AddRegulatPolicRequest;
+import cn.com.yusys.console.dto.regulatPolic.QueryRegulatPolicRequest;
+import cn.com.yusys.console.dto.regulatPolic.UpdateRegulatPolicRequest;
 import cn.com.yusys.console.po.RegulatPolic;
 import cn.com.yusys.console.service.RegulatPolicService;
 import cn.com.yusys.file.util.OutputData;
@@ -42,10 +46,27 @@ public class RegulatPolicController {
 	@Autowired
 	private RegulatPolicService regulatPolicService;
 	
+//	@SuppressWarnings("rawtypes")
+//	@RequestMapping(value = "/add",method = RequestMethod.POST)
+//	@ApiOperation(value = "/add",notes = "添加政策制度管理")
+//    public OutputData addRegulatPolic(@RequestBody RegulatPolicRequest request){
+//		OutputData out = new OutputData().returnSuccess();
+//		log.info("政策制度新增操作入参：{}",request);
+//		RegulatPolic rp = new RegulatPolic();
+//		BeanUtils.copyProperties(request, rp);
+//		try{
+//			regulatPolicService.add(rp);
+//		}catch(RiskException e){
+//			log.error("政策制度新增操作服务异常：{}",e);
+//			out.returnFail(e.getMessage());
+//		}
+//		return out;
+//	}
+	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/add",method = RequestMethod.POST)
 	@ApiOperation(value = "/add",notes = "添加政策制度管理")
-    public OutputData addRegulatPolic(@RequestBody RegulatPolicRequest request){
+    public OutputData addRegulatPolic(@Valid @RequestBody AddRegulatPolicRequest request){
 		OutputData out = new OutputData().returnSuccess();
 		log.info("政策制度新增操作入参：{}",request);
 		RegulatPolic rp = new RegulatPolic();
@@ -62,7 +83,7 @@ public class RegulatPolicController {
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/del",method = RequestMethod.POST)
 	@ApiOperation(value = "/del",notes = "删除政策制度管理")
-    public OutputData addRegulatPolic(@ApiParam(name = "ids",value="ids,多个id使用','连接",required = true)@RequestParam(value = "ids", required = true)String ids){
+    public OutputData delRegulatPolic(@ApiParam(name = "ids",value="ids,多个id使用','连接",required = true)@RequestParam(value = "ids", required = true)String ids){
 		OutputData out = new OutputData().returnSuccess();
 		log.info("政策制度删除操作入参：{}",ids);
 		try{
@@ -84,7 +105,7 @@ public class RegulatPolicController {
 	@RequestMapping(value="/update",method = RequestMethod.POST)
 	@ApiOperation(value = "/update",notes = "更新政策制度管理")
 	@SuppressWarnings("rawtypes")
-    public OutputData update(@RequestBody RegulatPolicRequest request){
+    public OutputData update(@Valid @RequestBody UpdateRegulatPolicRequest request){
 		OutputData out = new OutputData().returnSuccess();
 		Integer id = request.getId();
 		if(id==null){
@@ -108,7 +129,7 @@ public class RegulatPolicController {
 	@SuppressWarnings({"rawtypes", "unchecked"})
     @RequestMapping(value = "/queryByOption",method = RequestMethod.POST)
 	@ApiOperation(value = "/queryByOption",notes = "多条件查询政策制度")
-	public OutputData queryByOption(@RequestBody RegulatPolicRequest request){
+	public OutputData queryByOption(@RequestBody QueryRegulatPolicRequest request){
 		OutputData out = new OutputData().returnSuccess();
 		RegulatPolic rp = new RegulatPolic();
 		try{
@@ -125,8 +146,11 @@ public class RegulatPolicController {
 	@SuppressWarnings({"rawtypes", "unchecked", "deprecation"})
     @RequestMapping(value = "/queryByOptionPage",method = RequestMethod.POST)
 	@ApiOperation(value = "/queryByOptionPage",notes = "多条件查询政策制度")
-	public OutputData queryByOptionPage(@RequestBody RegulatPolicRequest request,Integer pageSize,Integer pageCount){
+	public OutputData queryByOptionPage(@RequestBody QueryRegulatPolicRequest request,
+			@ApiParam(name = "pageSize",value="pageSize",required = false)@RequestParam(value = "pageSize", required = false)Integer pageSize,
+			@ApiParam(name = "pageCount",value="pageCount",required = false)@RequestParam(value = "pageCount", required = false)Integer pageCount){
 		OutputData out = new OutputData().returnSuccess();
+		log.info("多条件查询政策制度分页参数：pageSize:{},pageCount:{}",pageSize,pageCount);
 		RegulatPolic rp = new RegulatPolic();
 		if(pageSize ==null || pageSize<1){
 			pageSize = 1;

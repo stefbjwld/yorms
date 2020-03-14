@@ -68,10 +68,10 @@ public class RegulatPolicServiceImpl implements RegulatPolicService {
 		StringBuilder sql = new StringBuilder();
 		sql.append("select id,regulation_name,regulation_no,grp_id,regulation_type,`status`,dept_no,date from t_regulation_polic where 1 = 1 ");
 		if(regulatPolic != null && StringUtils.isNotEmpty(regulatPolic.getRegulationName())){
-			sql.append(" and regulation_name like '%").append(regulatPolic).append("%'");
+			sql.append(" and regulation_name like '%").append(regulatPolic.getRegulationName()).append("%'");
 		}
 		if(regulatPolic!=null && StringUtils.isNotEmpty(regulatPolic.getRegulationName())){
-			sql.append(" and regulation_name = ").append(regulatPolic.getRegulationName());
+			sql.append(" and regulation_name = '").append(regulatPolic.getRegulationName()).append("'");
 		}
 		if(regulatPolic!=null && regulatPolic.getRegulationType()>0){
 			sql.append(" and regulation_type = ").append(regulatPolic.getRegulationType());
@@ -128,7 +128,8 @@ public class RegulatPolicServiceImpl implements RegulatPolicService {
 	    List<Predicate> predicates = new ArrayList<Predicate>(); 
 	    if(regulatPolic != null && StringUtils.isNotEmpty(regulatPolic.getRegulationName())){
 //	    	Predicate predicate = criteriaBuilder.equal(rootFrom.get("regulationName").as(String.class), regulatPolic.getRegulationName());
-	    	Predicate predicate = criteriaBuilder.like(rootFrom.joinList("%").join("regulationName").join("%"), regulatPolic.getRegulationName());
+//	    	Predicate predicate = criteriaBuilder.like(rootFrom.joinList("%").join("regulationName").join("%"), regulatPolic.getRegulationName());
+	    	Predicate predicate = criteriaBuilder.like(rootFrom.get("regulationName"), "%"+regulatPolic.getRegulationName());
 	    	predicates.add(predicate);
 		}
 		if(regulatPolic!=null && StringUtils.isNotEmpty(regulatPolic.getRegulationName())){

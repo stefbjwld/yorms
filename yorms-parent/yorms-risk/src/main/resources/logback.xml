@@ -15,7 +15,7 @@
     <springProfile name = "prod">
     	<property name = "LOG_HOME" value = "/home/logs/meisw/prod" />
     </springProfile> -->
-    <property name = "LOG_HOME" value = "D:/logs/meisw/dev"></property>
+    <property name = "LOG_HOME" value = "/home/micro-logs/yorms-risk"></property>
 
     <!--0. 日志格式和颜色渲染 -->
     <!-- 彩色日志依赖的渲染类 -->

@@ -19,8 +19,8 @@ import javax.persistence.Table;
 @Table(name = "t_regulation_polic")
 public class RegulatPolic implements Serializable {
 	
-	private static final long serialVersionUID = 6575587756318614380L;
-	
+    private static final long serialVersionUID = 1L;
+
 	/**
 	 * 主键
 	 */

@@ -50,11 +50,17 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 		</dependency>
-		
+
 		<!-- 输出rest-doc文档 -->
 		<dependency>
 			<groupId>org.springframework.restdocs</groupId>
 			<artifactId>spring-restdocs-mockmvc</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.shalousun</groupId>
+			<artifactId>smart-doc</artifactId>
+			<version>1.8.1</version>
 		</dependency>
 	</dependencies>
 
