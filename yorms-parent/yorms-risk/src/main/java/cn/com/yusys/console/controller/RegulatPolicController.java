@@ -13,9 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +26,8 @@ import cn.com.yusys.console.dto.regulatPolic.UpdateRegulatPolicRequest;
 import cn.com.yusys.console.po.RegulatPolic;
 import cn.com.yusys.console.service.RegulatPolicService;
 import cn.com.yusys.file.util.OutputData;
+import cn.com.yusys.file.util.Page;
+import cn.com.yusys.file.util.PageUtil;
 import cn.com.yusys.file.util.RiskException;
 
 /**
@@ -143,7 +142,7 @@ public class RegulatPolicController {
 		return out;
 	}
 	
-	@SuppressWarnings({"rawtypes", "unchecked", "deprecation"})
+	@SuppressWarnings({"rawtypes", "unchecked"})
     @RequestMapping(value = "/queryByOptionPage",method = RequestMethod.POST)
 	@ApiOperation(value = "/queryByOptionPage",notes = "多条件查询政策制度")
 	public OutputData queryByOptionPage(@RequestBody QueryRegulatPolicRequest request,
@@ -160,11 +159,15 @@ public class RegulatPolicController {
 		}
 		try{
 			BeanUtils.copyProperties(request, rp);
-			Pageable pageable = new PageRequest(pageSize,pageCount);
+			/*Pageable pageable = new PageRequest(pageSize,pageCount);
 			Page<RegulatPolic> page = regulatPolicService.page(rp, pageable);
-			out.setData(page);
+			out.setData(page);*/
+			List<RegulatPolic> result = regulatPolicService.queryByRegulatPolic(rp);
+			Page<RegulatPolic> page = (Page<RegulatPolic>)PageUtil.startPages(result, pageCount, pageSize);
+			log.info("page:{}",page);
+			out.setData(PageUtil.startPages(result, pageCount, pageSize));;
 		}catch(RiskException e){
-			log.error("多條件查詢政策制度服务异常：{}",e);
+			log.error("多条件查詢政策制度服务异常：{}",e);
 			out.returnFail(e.getMessage());
 		}
 		return out;

@@ -11,8 +11,8 @@ spring:
         register: true
         healthCheckPath: /actuator/health
         instanceId: ${spring.application.name}-${server.port}-${spring.cloud.client.hostname}
-      host: localhost
-      port: 8500
+      host: 192.168.60.137
+      port: 24170
       config:
         enabled: true
         format: yaml

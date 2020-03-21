@@ -23,6 +23,11 @@ public class Page<T> {
     public void setTotal(Integer total) {
     	this.total = total;
     }
+
+	@Override
+    public String toString() {
+	    return "Page [pageData=" + pageData + ", total=" + total + "]";
+    }
 	
 	
 }

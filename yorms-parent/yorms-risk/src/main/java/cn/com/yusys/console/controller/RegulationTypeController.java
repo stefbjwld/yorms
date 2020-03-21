@@ -156,7 +156,7 @@ public class RegulationTypeController {
 			for(RegulationType type: result){
 				map = new HashMap<String,Object>();
 				map.put("id", type.getId());
-				map.put("lable", type.getTypeName());
+				map.put("label", type.getTypeName());
 				map.put("value", type.getTypeCode());
 				if(Constants.TYPETREECODE_W.equals(type.getTypeTreeCode())){
 					wList.add(map);
