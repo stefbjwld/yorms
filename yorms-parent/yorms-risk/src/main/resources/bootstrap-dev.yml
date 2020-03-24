@@ -1,5 +1,7 @@
 server:
   port: 24152
+  servlet:
+    context-path: /yorms-risk
 spring:
   application:
     name: yorms-risk
@@ -7,12 +9,12 @@ spring:
   cloud:
     consul:
       discovery:
-        service-name: yorms-risk
+        service-name: ${spring.application.name}
         register: true
         healthCheckPath: /actuator/health
         instanceId: ${spring.application.name}-${server.port}-${spring.cloud.client.hostname}
-      host: 192.168.60.137
-      port: 24170
+      host: localhost
+      port: 8500
       config:
         enabled: true
         format: yaml

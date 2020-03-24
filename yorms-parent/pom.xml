@@ -24,7 +24,7 @@
 		<module>yorms-activity</module>
 		<module>yorms-file</module>
 		<module>yorms-common</module>
-		<!-- <module>yorms-gateway</module> -->
+		<module>yorms-zuul</module>
 	</modules>
 
 	<dependencies>
