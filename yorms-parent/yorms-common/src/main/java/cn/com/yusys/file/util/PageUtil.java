@@ -45,6 +45,9 @@ public class PageUtil {
 	 * @return
 	 */
 	public static <T> Page<T> startPages(List<T> list,Integer pageNum,Integer pageSize){
+		if(pageNum<1){
+			pageNum = 1;
+		}
 		Page<T> page = new Page<T>();
 		page.setTotal(list.size());
 		page.setPageData(startPage(list, pageNum, pageSize));

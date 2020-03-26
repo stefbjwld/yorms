@@ -48,12 +48,25 @@ public class TRiskLevelController {
     @SuppressWarnings("rawtypes")
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ApiOperation(value = "/add",notes = "风险等级信息添加")
-    public OutputData add(@Valid @RequestBody AddRiskLevelRequest request){
-    	log.info("风险等级信息添加入参：{}",request);
+    public OutputData add(
+    		@Valid @ApiParam(name = "levelNo", value = "风险等级编码", required = true)@RequestParam(value = "levelNo",required = true)Integer levelNo,
+    		@Valid @ApiParam(name = "levelName", value = "风险名称", required = true)@RequestParam(value = "levelName",required = true)String levelName,
+    		@Valid @ApiParam(name = "riskImpact", value = "风险影响", required = true)@RequestParam(value = "riskImpact",required = true)String riskImpact,
+    		@Valid @ApiParam(name = "levelValue", value = "风险值", required = true)@RequestParam(value = "levelValue",required = true)String levelValue,
+    		@Valid @ApiParam(name = "riskStatus", value = "风险状态：0激活，1新录入，2审批中，3废弃", required = true)@RequestParam(value = "riskStatus",required = true)Integer riskStatus,
+    		@Valid @ApiParam(name = "riskNo", value = "风险编号", required = true)@RequestParam(value = "riskNo",required = true)String riskNo,
+    		@Valid @ApiParam(name = "riskDescription", value = "风险描述", required = true)@RequestParam(value = "riskDescription",required = true)String riskDescription
+    		){
     	OutputData out = new OutputData().returnFail();
     	TRiskLevel tl = new TRiskLevel();
     	try{
-    		BeanUtils.copyProperties(request, tl);
+    		tl.setLevelNo(levelNo);
+    		tl.setLevelName(levelName);
+    		tl.setRiskImpact(riskImpact);
+    		tl.setLevelValue(levelValue);
+    		tl.setRiskStatus(riskStatus);
+    		tl.setRiskNo(riskNo);
+    		tl.setRiskDescription(riskDescription);
         	tRiskLevelService.add(tl);
     	}catch(RiskException e){
     		log.error("风险等级信息添加服务异常：{}",e);
@@ -65,13 +78,33 @@ public class TRiskLevelController {
     @SuppressWarnings("rawtypes")
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     @ApiOperation(value = "/update",notes = "风险等级信息编辑")
-    public OutputData update(@Valid @RequestBody UpdateRiskLevelRequest request){
-    	log.info("风险等级信息修改入参：{}",request);
+    public OutputData update(
+    		@Valid @ApiParam(name = "id", value = "主键", required = true)@RequestParam(value = "id",required = true)Integer id,
+    		@Valid @ApiParam(name = "levelNo", value = "风险等级编码", required = true)@RequestParam(value = "levelNo",required = true)Integer levelNo,
+    		@Valid @ApiParam(name = "levelName", value = "风险名称", required = true)@RequestParam(value = "levelName",required = true)String levelName,
+    		@Valid @ApiParam(name = "riskImpact", value = "风险影响", required = true)@RequestParam(value = "riskImpact",required = true)String riskImpact,
+    		@Valid @ApiParam(name = "levelValue", value = "风险值", required = true)@RequestParam(value = "levelValue",required = true)String levelValue,
+    		@Valid @ApiParam(name = "riskStatus", value = "风险状态：0激活，1新录入，2审批中，3废弃", required = true)@RequestParam(value = "riskStatus",required = true)Integer riskStatus,
+    		@Valid @ApiParam(name = "riskNo", value = "风险编号", required = true)@RequestParam(value = "riskNo",required = true)String riskNo,
+    		@Valid @ApiParam(name = "riskDescription", value = "风险描述", required = true)@RequestParam(value = "riskDescription",required = true)String riskDescription
+    		){
     	OutputData out = new OutputData().returnFail();
     	TRiskLevel tl = new TRiskLevel();
     	try{
-    		BeanUtils.copyProperties(request, tl);
-        	tRiskLevelService.add(tl);
+    		tl.setId(id);
+    		tl.setLevelNo(levelNo);
+    		tl.setLevelName(levelName);
+    		tl.setRiskImpact(riskImpact);
+    		tl.setLevelValue(levelValue);
+    		tl.setRiskStatus(riskStatus);
+    		tl.setRiskNo(riskNo);
+    		tl.setRiskDescription(riskDescription);
+    		TRiskLevel tl2 = tRiskLevelService.queryById(id);
+    		if(tl2 == null){
+    			out.returnFail("对象不存在");
+    		}else{
+    			tRiskLevelService.add(tl);
+    		}
     	}catch(RiskException e){
     		log.error("风险等级信息修改服务异常：{}",e);
     		out.returnFail(e.getMessage());

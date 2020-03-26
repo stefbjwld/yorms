@@ -43,4 +43,12 @@ public class TRiskLevelServiceImpl implements TRiskLevelService {
 		return out;
 	}
 
+	/**
+	 * 查询单个风险等级信息
+	 */
+	@Override
+    public TRiskLevel queryById(Integer id) throws RiskException {
+	    return tRiskLevelRepository.getOne(id);
+    }
+
 }

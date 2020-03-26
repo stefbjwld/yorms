@@ -15,4 +15,12 @@ public interface TRiskLevelService {
     @SuppressWarnings("rawtypes")
     public OutputData add(TRiskLevel tl)throws RiskException;
     
+    /**
+     * 根据主键查询详情
+     * @param id
+     * @return
+     * @throws RiskException
+     */
+    public TRiskLevel queryById(Integer id) throws RiskException;
+    
 }
