@@ -5,79 +5,49 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.util.Date;
 
-import javax.validation.Valid;
-import javax.validation.constraints.DecimalMax;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.Future;
-import javax.validation.constraints.NotEmpty;
-
-@ApiModel(value = "AddRectificMeasureRequest", description = "新增整改措施")
-public class AddRectificMeasureRequest {
+@ApiModel(value = "QueryTRectificMeasureRequest", description = "查询整改措施")
+public class QueryTRectificMeasureRequest {
 	
-	/**
-	 * 整改id
-	 */
-	@DecimalMin("1")
-	@DecimalMax("999999999")
-	@Valid
-	@ApiModelProperty(value = "整改id")
+	@ApiModelProperty(value = "主鍵id", required = false)
+	private Integer id;
+	
+	@ApiModelProperty(value = "整改id", required = false)
 	private Integer rectificMeasureId;
 	
-	/**
-	 * 计划完成时间
-	 */
-	@Future
-	// 将来的时间
-	@ApiModelProperty(value = "计划完成时间")
+	@ApiModelProperty(value = "计划完成时间", required = false)
 	private Date planCompletTime;
 	
-	/**
-	 * 整改牵头部门名称
-	 */
-	@NotEmpty(message = "整改牵头部门名称不能为空")
-	@Valid
-	@ApiModelProperty(value = "整改牵头部门名称", required = true)
+	@ApiModelProperty(value = "整改牵头部门名称", required = false)
 	private String rectificDeptName;
 	
-	/**
-	 * 整改牵头部门id
-	 */
-	@NotEmpty(message = "整改牵头部门id不能为空")
-	@Valid
-	@ApiModelProperty(value = "整改牵头部门id", required = true)
+	@ApiModelProperty(value = "整改牵头部门id", required = false)
 	private Integer rectificDeptId;
 	
-	/**
-	 * 整改牵头人
-	 */
-	@NotEmpty(message = "整改牵头人不能为空")
-	@Valid
-	@ApiModelProperty(value = "整改牵头人", required = true)
+	@ApiModelProperty(value = "整改牵头人", required = false)
 	private String rectificLeaderName;
 	
-	/**
-	 * 整改配合部门
-	 */
-	@NotEmpty(message = "整改配合部门不能为空")
-	@Valid
-	@ApiModelProperty(value = "整改配合部门", required = true)
+	@ApiModelProperty(value = "整改配合部门", required = false)
 	private String rectificCooperatDept;
 	
 	/**
 	 * 整改状态 1：已整改: 2：未整改、3：无法整改: 4：整改中
 	 */
-	@NotEmpty(message = "整改状态不能为空")
-	@Valid
-	@ApiModelProperty(value = "整改状态 1：已整改: 2：未整改、3：无法整改: 4：整改中", required = true)
+	@ApiModelProperty(value = "整改状态 1：已整改: 2：未整改、3：无法整改: 4：整改中", required = false)
 	private String rectificStatus;
 	
 	/**
 	 * 整理类型：1：短期，2：长期
 	 */
-	@NotEmpty(message = "整理类型不能为空")
-	@Valid
-	@ApiModelProperty(value = "整理类型：1：短期，2：长期", required = true)
+	@ApiModelProperty(value = "整理类型：1：短期，2：长期", required = false)
 	private String rectificType;
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
 	public Integer getRectificMeasureId() {
 		return rectificMeasureId;

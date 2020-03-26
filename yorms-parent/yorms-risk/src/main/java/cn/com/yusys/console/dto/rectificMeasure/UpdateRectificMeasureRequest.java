@@ -1,8 +1,5 @@
 package cn.com.yusys.console.dto.rectificMeasure;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -11,8 +8,17 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotEmpty;
 
-@ApiModel(value = "AddRectificMeasureRequest", description = "新增整改措施")
-public class AddRectificMeasureRequest {
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value = "UpdateRectificMeasureRequest", description = "更新整改措施")
+public class UpdateRectificMeasureRequest {
+	
+	@DecimalMin("1")
+	@DecimalMax("999999999")
+	@Valid
+	@ApiModelProperty(value = "主鍵id")
+	private Integer id;
 	
 	/**
 	 * 整改id
@@ -78,6 +84,14 @@ public class AddRectificMeasureRequest {
 	@Valid
 	@ApiModelProperty(value = "整理类型：1：短期，2：长期", required = true)
 	private String rectificType;
+	
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	
 	public Integer getRectificMeasureId() {
 		return rectificMeasureId;

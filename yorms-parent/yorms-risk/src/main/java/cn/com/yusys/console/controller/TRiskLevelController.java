@@ -49,24 +49,26 @@ public class TRiskLevelController {
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ApiOperation(value = "/add",notes = "风险等级信息添加")
     public OutputData add(
-    		@Valid @ApiParam(name = "levelNo", value = "风险等级编码", required = true)@RequestParam(value = "levelNo",required = true)Integer levelNo,
-    		@Valid @ApiParam(name = "levelName", value = "风险名称", required = true)@RequestParam(value = "levelName",required = true)String levelName,
-    		@Valid @ApiParam(name = "riskImpact", value = "风险影响", required = true)@RequestParam(value = "riskImpact",required = true)String riskImpact,
-    		@Valid @ApiParam(name = "levelValue", value = "风险值", required = true)@RequestParam(value = "levelValue",required = true)String levelValue,
-    		@Valid @ApiParam(name = "riskStatus", value = "风险状态：0激活，1新录入，2审批中，3废弃", required = true)@RequestParam(value = "riskStatus",required = true)Integer riskStatus,
-    		@Valid @ApiParam(name = "riskNo", value = "风险编号", required = true)@RequestParam(value = "riskNo",required = true)String riskNo,
-    		@Valid @ApiParam(name = "riskDescription", value = "风险描述", required = true)@RequestParam(value = "riskDescription",required = true)String riskDescription
+//    		@Valid @ApiParam(name = "levelNo", value = "风险等级编码", required = true)@RequestParam(value = "levelNo",required = true)Integer levelNo,
+//    		@Valid @ApiParam(name = "levelName", value = "风险名称", required = true)@RequestParam(value = "levelName",required = true)String levelName,
+//    		@Valid @ApiParam(name = "riskImpact", value = "风险影响", required = true)@RequestParam(value = "riskImpact",required = true)String riskImpact,
+//    		@Valid @ApiParam(name = "levelValue", value = "风险值", required = true)@RequestParam(value = "levelValue",required = true)String levelValue,
+//    		@Valid @ApiParam(name = "riskStatus", value = "风险状态：0激活，1新录入，2审批中，3废弃", required = true)@RequestParam(value = "riskStatus",required = true)Integer riskStatus,
+//    		@Valid @ApiParam(name = "riskNo", value = "风险编号", required = true)@RequestParam(value = "riskNo",required = true)String riskNo,
+//    		@Valid @ApiParam(name = "riskDescription", value = "风险描述", required = true)@RequestParam(value = "riskDescription",required = true)String riskDescription
+    		@Valid @RequestBody AddRiskLevelRequest request
     		){
-    	OutputData out = new OutputData().returnFail();
+    	OutputData out = new OutputData().returnSuccess();
     	TRiskLevel tl = new TRiskLevel();
+    	BeanUtils.copyProperties(request, tl);
     	try{
-    		tl.setLevelNo(levelNo);
-    		tl.setLevelName(levelName);
-    		tl.setRiskImpact(riskImpact);
-    		tl.setLevelValue(levelValue);
-    		tl.setRiskStatus(riskStatus);
-    		tl.setRiskNo(riskNo);
-    		tl.setRiskDescription(riskDescription);
+//    		tl.setLevelNo(levelNo);
+//    		tl.setLevelName(levelName);
+//    		tl.setRiskImpact(riskImpact);
+//    		tl.setLevelValue(levelValue);
+//    		tl.setRiskStatus(riskStatus);
+//    		tl.setRiskNo(riskNo);
+//    		tl.setRiskDescription(riskDescription);
         	tRiskLevelService.add(tl);
     	}catch(RiskException e){
     		log.error("风险等级信息添加服务异常：{}",e);
@@ -79,27 +81,29 @@ public class TRiskLevelController {
     @RequestMapping(value = "/update",method = RequestMethod.POST)
     @ApiOperation(value = "/update",notes = "风险等级信息编辑")
     public OutputData update(
-    		@Valid @ApiParam(name = "id", value = "主键", required = true)@RequestParam(value = "id",required = true)Integer id,
-    		@Valid @ApiParam(name = "levelNo", value = "风险等级编码", required = true)@RequestParam(value = "levelNo",required = true)Integer levelNo,
-    		@Valid @ApiParam(name = "levelName", value = "风险名称", required = true)@RequestParam(value = "levelName",required = true)String levelName,
-    		@Valid @ApiParam(name = "riskImpact", value = "风险影响", required = true)@RequestParam(value = "riskImpact",required = true)String riskImpact,
-    		@Valid @ApiParam(name = "levelValue", value = "风险值", required = true)@RequestParam(value = "levelValue",required = true)String levelValue,
-    		@Valid @ApiParam(name = "riskStatus", value = "风险状态：0激活，1新录入，2审批中，3废弃", required = true)@RequestParam(value = "riskStatus",required = true)Integer riskStatus,
-    		@Valid @ApiParam(name = "riskNo", value = "风险编号", required = true)@RequestParam(value = "riskNo",required = true)String riskNo,
-    		@Valid @ApiParam(name = "riskDescription", value = "风险描述", required = true)@RequestParam(value = "riskDescription",required = true)String riskDescription
+//    		@Valid @ApiParam(name = "id", value = "主键", required = true)@RequestParam(value = "id",required = true)Integer id,
+//    		@Valid @ApiParam(name = "levelNo", value = "风险等级编码", required = true)@RequestParam(value = "levelNo",required = true)Integer levelNo,
+//    		@Valid @ApiParam(name = "levelName", value = "风险名称", required = true)@RequestParam(value = "levelName",required = true)String levelName,
+//    		@Valid @ApiParam(name = "riskImpact", value = "风险影响", required = true)@RequestParam(value = "riskImpact",required = true)String riskImpact,
+//    		@Valid @ApiParam(name = "levelValue", value = "风险值", required = true)@RequestParam(value = "levelValue",required = true)String levelValue,
+//    		@Valid @ApiParam(name = "riskStatus", value = "风险状态：0激活，1新录入，2审批中，3废弃", required = true)@RequestParam(value = "riskStatus",required = true)Integer riskStatus,
+//    		@Valid @ApiParam(name = "riskNo", value = "风险编号", required = true)@RequestParam(value = "riskNo",required = true)String riskNo,
+//    		@Valid @ApiParam(name = "riskDescription", value = "风险描述", required = true)@RequestParam(value = "riskDescription",required = true)String riskDescription
+    		@Valid @RequestBody UpdateRiskLevelRequest request
     		){
-    	OutputData out = new OutputData().returnFail();
+    	OutputData out = new OutputData().returnSuccess();
     	TRiskLevel tl = new TRiskLevel();
+    	BeanUtils.copyProperties(request, tl);
     	try{
-    		tl.setId(id);
-    		tl.setLevelNo(levelNo);
-    		tl.setLevelName(levelName);
-    		tl.setRiskImpact(riskImpact);
-    		tl.setLevelValue(levelValue);
-    		tl.setRiskStatus(riskStatus);
-    		tl.setRiskNo(riskNo);
-    		tl.setRiskDescription(riskDescription);
-    		TRiskLevel tl2 = tRiskLevelService.queryById(id);
+//    		tl.setId(id);
+//    		tl.setLevelNo(levelNo);
+//    		tl.setLevelName(levelName);
+//    		tl.setRiskImpact(riskImpact);
+//    		tl.setLevelValue(levelValue);
+//    		tl.setRiskStatus(riskStatus);
+//    		tl.setRiskNo(riskNo);
+//    		tl.setRiskDescription(riskDescription);
+    		TRiskLevel tl2 = tRiskLevelService.queryById(tl.getId());
     		if(tl2 == null){
     			out.returnFail("对象不存在");
     		}else{

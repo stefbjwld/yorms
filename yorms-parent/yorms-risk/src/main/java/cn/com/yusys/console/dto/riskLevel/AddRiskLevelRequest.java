@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.Valid;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
 
 /*
@@ -12,7 +14,8 @@ import javax.validation.constraints.NotEmpty;
 @ApiModel(value = "AddRiskLevelRequest", description = "风险等级添加")
 public class AddRiskLevelRequest {
 	
-	@NotEmpty(message = "风险等级不能为空")
+	@DecimalMin("1")
+	@DecimalMax("999999999")
 	@Valid
 	@ApiModelProperty(value = "风险等级", required = true)
 	private int levelNo;
