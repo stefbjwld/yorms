@@ -1,0 +1,24 @@
+server:
+  port: 24153
+spring:
+  application:
+    name: yorms-oca
+    host: localhost
+  cloud:
+    consul:
+      discovery:
+        service-name: yorms-oca
+        register: true
+        healthCheckPath: /actuator/health
+        instanceId: ${spring.application.name}-${server.port}-${spring.cloud.client.hostname}
+      host: localhost
+      port: 8500
+      config:
+        enabled: true
+        format: yaml
+        data-key: yorms-oca
+        prefix: config
+        defaultContext: consul-config
+
+
+
