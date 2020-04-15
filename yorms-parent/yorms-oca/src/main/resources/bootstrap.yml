@@ -1,5 +1,5 @@
 server:
-  port: 24153
+  port: 24154
 spring:
   application:
     name: yorms-oca
@@ -12,7 +12,7 @@ spring:
         healthCheckPath: /actuator/health
         instanceId: ${spring.application.name}-${server.port}-${spring.cloud.client.hostname}
       host: localhost
-      port: 8500
+      port: 24170
       config:
         enabled: true
         format: yaml

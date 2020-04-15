@@ -31,7 +31,7 @@ public class OrganizationRequest implements Serializable{
 	
 	
 	@ApiModelProperty(value = "是否部门",required = true)
-	private boolean isDepartment;
+	private boolean department;
 	
 
 	public long getId() {
@@ -80,13 +80,15 @@ public class OrganizationRequest implements Serializable{
 
 
 	public boolean isDepartment() {
-		return isDepartment;
+		return department;
 	}
 
 
-	public void setDepartment(boolean isDepartment) {
-		this.isDepartment = isDepartment;
+	public void setDepartment(boolean department) {
+		this.department = department;
 	}
+
+
 	
 	
 	

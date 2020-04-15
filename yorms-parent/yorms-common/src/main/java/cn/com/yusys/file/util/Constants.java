@@ -1,6 +1,8 @@
 package cn.com.yusys.file.util;
 
+import java.util.Map;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 /**
@@ -8,6 +10,18 @@ import java.util.UUID;
  *
  */
 public class Constants {
+	
+	public static Map<String,Integer> riskLevelMap = null;
+	
+	static {
+		riskLevelMap = new ConcurrentHashMap<String, Integer>();
+		riskLevelMap.put("1", 1);
+		riskLevelMap.put("2", 2);
+		riskLevelMap.put("3", 3);
+		riskLevelMap.put("4", 4);
+		riskLevelMap.put("5", 5);
+	}
+	
 	/**
 	 * 法规政策分类一级，编码，外规
 	 */
@@ -26,6 +40,7 @@ public class Constants {
 	public static final String TYPETREECODE_N_CN = "内规";
 	
 	
+
 	/**
 	 * 用户管理--默认用户组
 	 */
@@ -38,11 +53,7 @@ public class Constants {
 	
 	
 	
-	
-	
-	
-	
-	
+
 	public static String getUUID(){
 		UUID uuid = UUID.randomUUID();
 		String result = uuid.toString().replace("-", "");

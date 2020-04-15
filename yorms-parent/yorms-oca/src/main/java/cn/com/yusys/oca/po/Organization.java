@@ -9,8 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "t_organization")
+@JsonIgnoreProperties(value = { "hibernateLazyInitializer", "handler" })
 public class Organization implements Serializable{
 	
 	/**
@@ -44,8 +47,8 @@ public class Organization implements Serializable{
 	@Column(name = "layer")
 	private long layer;
 	
-	@Column(name = "is_department")
-	private boolean isDepartment;
+	@Column(name = "department")
+	private boolean department;
 	
 
 	public long getId() {
@@ -106,12 +109,13 @@ public class Organization implements Serializable{
 	}
 
 	public boolean isDepartment() {
-		return isDepartment;
+		return department;
 	}
 
-	public void setDepartment(boolean isDepartment) {
-		this.isDepartment = isDepartment;
+	public void setDepartment(boolean department) {
+		this.department = department;
 	}
+
 
 
 	

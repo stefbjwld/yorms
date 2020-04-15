@@ -19,7 +19,7 @@ import javax.persistence.Table;
 @Table(name = "t_regulation_polic")
 public class RegulatPolic implements Serializable {
 	
-	private static final long serialVersionUID = 6575587756318614380L;
+	private static final long serialVersionUID = 1L;
 	
 	/**
 	 * 主键
@@ -146,6 +146,13 @@ public class RegulatPolic implements Serializable {
 	
 	public void setImgPath(String imgPath) {
 		this.imgPath = imgPath;
+	}
+	
+	@Override
+	public String toString() {
+		return "RegulatPolic [id=" + id + ", regulationName=" + regulationName + ", regulationNo=" + regulationNo + ", grpId="
+		        + grpId + ", regulationType=" + regulationType + ", status=" + status + ", deptNo=" + deptNo + ", date=" + date
+		        + ", imgPath=" + imgPath + "]";
 	}
 	
 }

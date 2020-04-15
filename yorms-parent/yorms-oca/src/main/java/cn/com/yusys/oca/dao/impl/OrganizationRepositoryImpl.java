@@ -51,7 +51,7 @@ public class OrganizationRepositoryImpl implements OrganizationRepositorySweeper
 
 		String HQLString = "SELECT org FROM Organization AS org WHERE org.leftId BETWEEN " + organizationFullProperties.getLeftId() + " AND " + organizationFullProperties.getRightId() 
 							+ " AND org.id <> " + organization.getId() 
-							+ " AND org.isDepartment = 0"
+							+ " AND org.department = 0"
 							+ " ORDER BY org.leftId ASC";
 		 
 		

@@ -14,6 +14,7 @@ D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\service
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dao\DutyRepository.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dao\UserGroupRelRepository.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dao\OrganizationRepository.java
+D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dto\UserResponse.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\po\Group.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dto\AuthorityRequest.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dao\AuthorityRepository.java

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: yorms-zuul
+Implementation-Version: 1.0.1
+Built-By: Crescent
+Implementation-Vendor-Id: cn.com.yusys
+Build-Jdk: 1.8.0_172
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/yorms-zuul
+Created-By: Maven Integration for Eclipse
+

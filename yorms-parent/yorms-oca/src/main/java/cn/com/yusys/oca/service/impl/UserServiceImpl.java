@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -107,18 +108,24 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	@Transactional
-	public Page<User> findUserListByFilterCriteria(Long orgId,Long dptId,Long groupId, Long roleId,Pageable pageable) {
+	public Page<User> findUserListByFilterCriteria(Long orgId,Long dptId,Long groupId, Long roleId,Boolean locked,Pageable pageable) {
 		// TODO Auto-generated method stub
-		
+		log.info("多条件查询用户  start ...");
 		User userExample = new User();
 		userExample.setOrgId(orgId);
 		userExample.setDptId(dptId);
+		ExampleMatcher exampleMatcher;
 		
-		List<User> users = new ArrayList<User>();
+		if (locked == null) {
+			exampleMatcher = ExampleMatcher.matching().withIgnorePaths("id").withIgnorePaths("credentialExpired").withIgnorePaths("locked");
+		}else {
+			userExample.setLocked(locked);
+			exampleMatcher = ExampleMatcher.matching().withIgnorePaths("id").withIgnorePaths("credentialExpired");
+		}
 		
-		Example<User> example = Example.of(userExample);
-		users = userRepository.findAll(example);
+		Example<User> example = Example.of(userExample,exampleMatcher);
 		
+		List<User> users = userRepository.findAll(example);
 		List<User> filteredUsers = new ArrayList<User>();
 		
 		for (User user : users) {
@@ -142,7 +149,6 @@ public class UserServiceImpl implements UserService {
 			
 			
 			List<UserAuthorityRel> userAuthorityRels = userAuthorityRelRepository.findByUserId(user.getId());
-						
 			for (UserAuthorityRel userAuthorityRel : userAuthorityRels) {
 				if (userAuthorityRel.getAuthorityId() == roleId) {
 					roleFlag = true;
@@ -154,27 +160,17 @@ public class UserServiceImpl implements UserService {
 			if (groupFlag&&roleFlag) {
 				filteredUsers.add(user);
 			}
+			
 
 		}
 		
 		Collections.reverse(filteredUsers);
 		
+		
+		log.info("查询结果条数：{}",filteredUsers.size());
+		
 		//手动分页
-		if (pageable.getOffset() > filteredUsers.size()) {
-			long total = 0L;
-		    PageImpl<User> usersPage = new PageImpl<>(filteredUsers, pageable, total);
-		    return usersPage;
-		}
-
-		if (pageable.getOffset() <= filteredUsers.size() && pageable.getOffset() + pageable.getPageSize() > filteredUsers.size()) {
-		    List<User> thisPageUser = filteredUsers.subList( (int) pageable.getOffset(), filteredUsers.size());
-		    PageImpl<User> usersPage = new PageImpl<>(thisPageUser, pageable, filteredUsers.size());
-		    return usersPage;
-		}
-
-		List<User> userList = filteredUsers.subList((int) pageable.getOffset(), (int)pageable.getOffset() + pageable.getPageSize());
-
-		PageImpl<User> usersPage = new PageImpl<>(userList, pageable, filteredUsers.size());
+		PageImpl<User> usersPage = PageUtil.convertToPages(filteredUsers, pageable);
 	    
 		return usersPage;
 	}

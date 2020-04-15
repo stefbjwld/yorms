@@ -1,0 +1,28 @@
+server:
+  port: 24152
+#  servlet:
+#    context-path: /yorms-risk
+spring:
+  application:
+    name: yorms-risk
+    host: localhost
+  cloud:
+    consul:
+      discovery:
+        service-name: ${spring.application.name}
+        register: true
+        healthCheckPath: /risk/actuator/health
+        instanceId: ${spring.application.name}-${server.port}-${spring.cloud.client.hostname}
+#        health-check-url: http://${spring.cloud.client.ip-address}:${server.port}/${server.servlet.context-path}/actuator/health
+        health-check-url: http://${spring.cloud.client.ip-address}:${server.port}/actuator/health
+      host: localhost
+      port: 8500
+      config:
+        enabled: true
+        format: yaml
+        data-key: yorms-risk
+        prefix: config
+        defaultContext: consul-config
+
+
+

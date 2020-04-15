@@ -123,10 +123,33 @@ public class OrganizationController {
 	}
 	
 	
+	
+	@SuppressWarnings("rawtypes")
+	@RequestMapping(value = "/getNodeById", method = RequestMethod.GET)
+	@ApiOperation(value = "/getNodeById",notes = "Get node by NodeId")
+	public OutputData getNodeById(Long id){
+		
+		OutputData out = new OutputData().returnSuccess();
+		
+		try {
+			Organization node = organizationService.findById(id);
+			out.setData(node);
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			log.info("Get node by NodeId Exception{}",e);
+			out.returnFail(e.getMessage());
+		}
+		
+		return out;
+		
+	}
+	
+	
 	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/nodeDel", method = RequestMethod.POST)
 	@ApiOperation(value = "/nodeDel",notes = "Delete organization or department")
-	public OutputData organizationDel(long id){
+	public OutputData organizationDel(Long id){
 		
 		OutputData out = new OutputData().returnSuccess();
 		
@@ -152,6 +175,7 @@ public class OrganizationController {
 		try {
 			Organization nodeSelected = organizationService.findById(id);
 			List<Organization> nodeList = organizationService.getOrgPath(nodeSelected);
+			nodeList.add(nodeSelected);
 			
 			out.setData(nodeList);
 		} catch (Exception e) {

@@ -1,10 +1,7 @@
 package cn.com.yusys.oca.controller.rest;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -14,26 +11,24 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
-import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import cn.com.yusys.file.util.OutputData;
-import cn.com.yusys.oca.dto.GroupRequest;
 import cn.com.yusys.oca.dto.UserAuthoityRelRequest;
 import cn.com.yusys.oca.dto.UserGroupRelRequest;
 import cn.com.yusys.oca.dto.UserRequest;
+import cn.com.yusys.oca.dto.UserResponse;
 import cn.com.yusys.oca.po.Authority;
 import cn.com.yusys.oca.po.Group;
 import cn.com.yusys.oca.po.User;
+import cn.com.yusys.oca.service.OrganizationService;
 import cn.com.yusys.oca.service.UserService;
+import cn.com.yusys.oca.util.PageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-
 /**
  * @项目名称 yorms-oca 
  * @类名称 UserController 
@@ -54,6 +49,9 @@ public class UserController {
 	
 	@Resource
 	UserService userService;
+	
+	@Resource
+	OrganizationService organizationService;
 	
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 	
@@ -103,6 +101,26 @@ public class UserController {
 			
 		}catch(Exception e){
 			log.info("Query all user Exception {}",e);
+			out.returnFail(e.getMessage());
+		}
+		return out;
+	}
+	
+	
+	@SuppressWarnings({"rawtypes", "unchecked"})
+    @RequestMapping(value = "/queryUserById",method = RequestMethod.GET)
+	@ApiOperation(value = "/queryUserById",notes = "Query User By Id")
+	public OutputData queryUserById(Long userId){
+		OutputData out = new OutputData().returnSuccess();
+		
+		
+		try{
+			User user = userService.findUserById(userId);
+			
+			out.setData(user);
+			
+		}catch(Exception e){
+			log.info("Query user by id Exception {}",e);
 			out.returnFail(e.getMessage());
 		}
 		return out;
@@ -207,7 +225,69 @@ public class UserController {
 		@SuppressWarnings("deprecation")
 		Pageable pageable = new PageRequest(page,pageSize);
 		
-		Page<User> pageUsers = userService.findAllUserPage(pageable);
+		List<User> users = userService.getUserList();
+		
+		List<UserResponse> userResponses = new ArrayList<UserResponse>();
+		//Page<User> pageUsers = userService.findAllUserPage(pageable);
+		
+		
+		for (int i = 0; i < users.size(); i++) {
+			
+			User user = users.get(i);
+			
+			Long orgId = user.getOrgId();
+			Long dptId = user.getDptId();
+			Long userId = user.getId();
+			
+			UserResponse userResponse = new UserResponse();
+			userResponse.setId(user.getId());
+			userResponse.setUserName(user.getUserName());
+			userResponse.setPassword(user.getPassword());
+			userResponse.setEmail(user.getEmail());
+			userResponse.setUserCode(user.getUserCode());
+			userResponse.setUserDesc(user.getUserDesc());
+			userResponse.setLocked(user.isLocked());
+			userResponse.setExpiredDate(user.getExpiredDate());
+			userResponse.setCredentialExpired(user.isCredentialExpired());
+			userResponse.setCredentialExpiredDate(user.getCredentialExpiredDate());
+			userResponse.setPhoneNumber(user.getPhoneNumber());
+			
+			
+			List<Group> groups = userService.findUserGroups(userId);
+			String groupString = "";
+			for (int j = 0; j < groups.size(); j++) {
+				if (groupString.equals("")) {
+					groupString = groups.get(j).getGroupName();
+				}else {
+					groupString = groupString + "\n" + groups.get(j).getGroupName();
+				}
+				
+			}
+			userResponse.setGroups(groupString);
+			
+			
+			List<Authority> authorities = userService.findUserAuthoritys(userId);
+			String authorityString = "";
+			for (int j = 0; j < authorities.size(); j++) {
+				if (authorityString.equals("")) {
+					authorityString = authorities.get(j).getAuthorityName();
+				}else {
+					authorityString = authorityString + "\n" + authorities.get(j).getAuthorityName();
+				}
+			}
+			userResponse.setAuthorities(authorityString);
+			
+			
+			String orgName = organizationService.findById(orgId).getName();
+			userResponse.setOrgName(orgName);
+			
+			String dptName = organizationService.findById(dptId).getName();
+			userResponse.setDptName(dptName);
+			
+			userResponses.add(userResponse);
+		}
+		
+		Page<UserResponse> pageUsers = PageUtil.convertToPages(userResponses, pageable);
 		
 		out.setData(pageUsers);
 		
@@ -351,7 +431,7 @@ public class UserController {
 	@SuppressWarnings({"rawtypes"})
 	@RequestMapping(value = "/userFilter", method = RequestMethod.GET)
 	@ApiOperation(value = "/userFilter",notes = "Filter Users")
-	public OutputData userFilter(Long orgId,Long dptId,Long groupId, Long roleId, String enable,Integer pageSize,Integer page) {
+	public OutputData userFilter(Long orgId,Long dptId,Long groupId, Long roleId, Boolean locked,Integer pageSize,Integer page) {
 		
 		OutputData out = new OutputData().returnSuccess();
 		
@@ -364,7 +444,7 @@ public class UserController {
 		@SuppressWarnings("deprecation")
 		Pageable pageable = new PageRequest(page,pageSize);
 		
-		Page<User> pageUsers = userService.findUserListByFilterCriteria(orgId,dptId,groupId, roleId,pageable);
+		Page<User> pageUsers = userService.findUserListByFilterCriteria(orgId, dptId, groupId, roleId, locked, pageable);
 		
 		out.setData(pageUsers);
 		

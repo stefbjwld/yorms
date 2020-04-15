@@ -19,7 +19,7 @@ public interface OrganizationRepository extends JpaRepository<Organization, Long
 	public List<Organization> getOrganizationsByPreorderTraversal();
 	
 	
-	@Query("SELECT node FROM Organization AS node,Organization AS parent WHERE node.leftId BETWEEN parent.leftId AND parent.rightId AND parent.id = 1 AND node.isDepartment = 0  ORDER BY node.leftId")
+	@Query("SELECT node FROM Organization AS node,Organization AS parent WHERE node.leftId BETWEEN parent.leftId AND parent.rightId AND parent.id = 1 AND node.department = 0  ORDER BY node.leftId")
 	public List<Organization> getOrganizationsExcludeDepartmentByPreorderTraversal();
 	
 	@Query("SELECT node FROM Organization AS node WHERE node.leftId < :leftId AND node.rightId > :rightId ORDER BY node.leftId")

@@ -85,7 +85,7 @@ public interface UserService {
 	public Page<User> findUsersByAuthority(Long authorityId,Pageable pageable);
 	
 	
-	public Page<User> findUserListByFilterCriteria(Long orgId,Long dptId,Long groupId, Long roleId, Pageable pageable);
+	public Page<User> findUserListByFilterCriteria(Long orgId,Long dptId,Long groupId, Long roleId, Boolean locked,Pageable pageable);
 	
 	
 
