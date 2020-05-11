@@ -19,7 +19,7 @@ public class AddRectificMeasureRequest {
 	 */
 	@DecimalMin("1")
 	@DecimalMax("999999999")
-	@Valid
+//	@Valid
 	@ApiModelProperty(value = "整改id")
 	private Integer rectificMeasureId;
 	
@@ -43,7 +43,7 @@ public class AddRectificMeasureRequest {
 	 * 整改牵头部门id
 	 */
 	@NotEmpty(message = "整改牵头部门id不能为空")
-	@Valid
+//	@Valid
 	@ApiModelProperty(value = "整改牵头部门id", required = true)
 	private Integer rectificDeptId;
 	
