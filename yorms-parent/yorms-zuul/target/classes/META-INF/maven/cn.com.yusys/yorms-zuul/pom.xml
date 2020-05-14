@@ -2,14 +2,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.8.RELEASE</version>
+		<groupId>cn.com.yusys</groupId>
+		<artifactId>yorms-parent</artifactId>
+		<version>1.0.1</version>
 	</parent>
+	
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>cn.com.yusys</groupId>
 	<artifactId>yorms-zuul</artifactId>
-	<version>1.0.1</version>
 	<packaging>jar</packaging>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,27 +26,40 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
 		<!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-zuul -->
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
-		    <version>2.0.2.RELEASE</version>
+		</dependency>
+		
+		
+		<dependency>
+           <groupId>org.springframework.boot</groupId>
+           <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        
+        
+        <dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+        
+        <dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.6.1</version>
 		</dependency>
 		
 		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-consul-discovery</artifactId>
-			<version>2.0.2.RELEASE</version>
-		</dependency>
-
-		<!-- consul配置中心 -->
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-consul-config</artifactId>
-			<version>2.0.2.RELEASE</version>
+			<groupId>cn.com.yusys</groupId>
+			<artifactId>yorms-common</artifactId>
+			<version>1.0.1</version>
 		</dependency>
 
 	</dependencies>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -56,12 +68,6 @@
 			</plugin>
 		</plugins>
 	</build>
-
-	<repositories>
-		<repository>
-			<id>aliyun-maven</id>
-			<name>Ali Maven</name>
-			<url>http://maven.aliyun.com/nexus/content/groups/public/</url>
-		</repository>
-	</repositories>
+	
+	
 </project>

@@ -17,6 +17,7 @@ D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dao\Org
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dto\UserResponse.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\po\Group.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dto\AuthorityRequest.java
+D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dto\UserCheck.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dao\AuthorityRepository.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dto\GroupRequest.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\po\Authority.java
@@ -28,7 +29,9 @@ D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\control
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\po\GroupAuthorityRel.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\controller\rest\OrganizationController.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dao\UserAuthorityRelRepository.java
+D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\controller\rest\HealthTestController.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dto\UserRequest.java
+D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dto\UserLoginRequest.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\util\test.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\controller\rest\UserController.java
 D:\Git\yorms\yorms\yorms-parent\yorms-oca\src\main\java\cn\com\yusys\oca\dto\UserAuthoityRelRequest.java

@@ -13,12 +13,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import cn.com.yusys.file.util.OutputData;
 import cn.com.yusys.oca.dto.UserAuthoityRelRequest;
+import cn.com.yusys.oca.dto.UserCheck;
 import cn.com.yusys.oca.dto.UserGroupRelRequest;
+import cn.com.yusys.oca.dto.UserLoginRequest;
 import cn.com.yusys.oca.dto.UserRequest;
 import cn.com.yusys.oca.dto.UserResponse;
 import cn.com.yusys.oca.po.Authority;
@@ -53,7 +56,46 @@ public class UserController {
 	@Resource
 	OrganizationService organizationService;
 	
+	
+	
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
+	
+	
+	
+    @RequestMapping(value="/testToken",method = RequestMethod.POST)
+    @SuppressWarnings("rawtypes")
+    @ApiOperation(value = "/testToken",notes = "testToken")
+    //验证token要传入相关参数Header，正常要将Header封装为json对象
+    public String coupon(@RequestHeader("token") String token,@RequestHeader("userId") String userID) throws Exception{
+        System.out.println("token----->"+token+",user level----->"+userID);
+        return "-----get coupon!-----";
+    }
+	
+	
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@SuppressWarnings("rawtypes")
+	@ApiOperation(value = "/login",notes = "Used for gateway user check")
+	public UserCheck login(@RequestBody UserLoginRequest loginRequest) {
+		
+		UserCheck userCheck = new UserCheck();
+		User user = userService.findByUserName(loginRequest.getUserName());
+		if (user != null) {
+			if (user.getPassword().equals(loginRequest.getPassword())) {
+				userCheck.setUserId(user.getId());
+				userCheck.setCheckResult("验证成功");
+			}else {
+				userCheck.setCheckResult("密码错误");
+			}
+			
+		}else {
+			userCheck.setCheckResult("用户名不存在");
+		}
+		
+		return userCheck;
+		
+	}
+	
+	
 	
 	
 	
@@ -64,7 +106,6 @@ public class UserController {
 	public OutputData userAdd(@RequestBody UserRequest request) {
 		
 		OutputData out = new OutputData().returnSuccess();
-		
 		User user = new User();
 		
 		try {
@@ -148,10 +189,25 @@ public class UserController {
 		return out;
 	}
 	
+	@SuppressWarnings({"rawtypes", "unchecked"})
+    @RequestMapping(value = "/feignQueryUserGroups",method = RequestMethod.GET)
+	@ApiOperation(value = "/feignQueryUserGroups",notes = "Query user groups")
+	public List<Group> feignQueryUserGroups(Long userId){
+		
+		List<Group> groupList = new ArrayList<Group>();
+		try{
+			groupList = userService.findUserGroups(userId);
+		}catch(Exception e){
+			log.info("Query user groups Exception {}",e);
+			return groupList;
+		}
+		return groupList;
+	}
+	
 	
 	@SuppressWarnings({"rawtypes", "unchecked"})
     @RequestMapping(value = "/queryUserAuthoritys",method = RequestMethod.GET)
-	@ApiOperation(value = "/queryUserAuthoritys",notes = "Query user authoritys")
+	@ApiOperation(value = "/queryUserAuthoritys",notes = "Feign query user authoritys")
 	public OutputData queryUserAuthoritys(Long userId){
 		OutputData out = new OutputData().returnSuccess();
 		
@@ -165,6 +221,22 @@ public class UserController {
 			out.returnFail(e.getMessage());
 		}
 		return out;
+	}
+	
+	@SuppressWarnings({"rawtypes", "unchecked"})
+    @RequestMapping(value = "/feignQueryUserAuthoritys",method = RequestMethod.GET)
+	@ApiOperation(value = "/feignQueryUserAuthoritys",notes = "Feign query user authoritys")
+	public List<Authority> feignQueryUserAuthoritys(Long userId){
+		
+		List<Authority> authorities = new ArrayList<Authority>();
+		try{
+			authorities = userService.findUserAuthoritys(userId);
+			
+		}catch(Exception e){
+			log.info("Query user authoritys Exception {}",e);
+			return authorities;
+		}
+		return authorities;
 	}
 	
 	

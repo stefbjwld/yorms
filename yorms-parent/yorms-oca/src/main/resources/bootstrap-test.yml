@@ -9,8 +9,9 @@ spring:
       discovery:
         service-name: yorms-oca
         register: true
-        healthCheckPath: /actuator/health
         instanceId: ${spring.application.name}-${server.port}-${spring.cloud.client.hostname}
+        preferIpAddress: true
+        health-check-url: http://${spring.cloud.client.ip-address}:${server.port}/actuator/health
       host: localhost
       port: 24170
       config:

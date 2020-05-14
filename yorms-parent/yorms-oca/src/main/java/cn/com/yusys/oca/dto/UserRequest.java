@@ -1,8 +1,5 @@
 package cn.com.yusys.oca.dto;
 import java.io.Serializable;
-
-import javax.persistence.Column;
-
 import io.swagger.annotations.ApiModelProperty;
 
 public class UserRequest implements Serializable{
