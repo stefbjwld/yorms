@@ -16,8 +16,8 @@ public class UpdateRiskLevelRequest {
 	@ApiModelProperty(value = "主键", required = true)
 	private int id;
 	
-	@NotEmpty(message = "风险等级名称不能为空")
-	@Valid
+	@DecimalMin("1")
+	@DecimalMax("999999999")
 	@ApiModelProperty(value = "风险等级", required = false)
 	private int levelNo;
 	
