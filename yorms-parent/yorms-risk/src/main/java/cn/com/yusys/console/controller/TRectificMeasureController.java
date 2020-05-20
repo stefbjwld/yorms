@@ -60,7 +60,7 @@ public class TRectificMeasureController {
 	@SuppressWarnings("rawtypes")
     @PostMapping("/add")
 	@ApiOperation(value = "/add",notes = "新增")
-	public OutputData add(@Valid @RequestBody AddRectificMeasureRequest request) {
+	public OutputData add(@RequestBody AddRectificMeasureRequest request) {
 		OutputData out = new OutputData().returnSuccess();
 		TRectificMeasure tRectificMeasure = new TRectificMeasure();
 		BeanUtils.copyProperties(request, tRectificMeasure);
