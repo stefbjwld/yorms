@@ -34,7 +34,7 @@ public class IndexAcqFreqDaoImpl {
 		List<IndexAcqFreqResponse> result = new ArrayList<IndexAcqFreqResponse>();
 		IndexAcqFreqResponse iafr = null;
 		StringBuilder sb = new StringBuilder();
-		sb.append("select a.id as id,a.risk_classifi_id as riskClassifiId,a.index_en as indexEn,a.index_zh as indexZh,a.index_desc as indexDesc,a.index_acq_freq as indexAcqFreq,a.index_unit as indexUnit,a.index_json as indexJson,e.level1,e.level2,e.level3 from t_index_acq_freq a left join");
+		sb.append("select a.id as id,a.risk_classifi_id as riskClassifiId,a.index_en as indexEn,a.index_no as indexNo,a.index_zh as indexZh,a.index_desc as indexDesc,a.index_acq_freq as indexAcqFreq,a.index_unit as indexUnit,a.index_json as indexJson,e.level1,e.level2,e.level3 from t_index_acq_freq a left join");
 		sb.append(" (select a.`name` as level1,a.id as 一级分类ID,b.`name` as level2,b.id as 二级分类ID,c.`name` as level3,c.id as 三级分类ID  from t_risk_classification a left join t_risk_classification b on a.id = b.parent_id");
 		sb.append(" left join t_risk_classification c on b.id = c.parent_id");
 		sb.append(" where a.parent_id = 0) e on e.三级分类ID = a.risk_classifi_id");
@@ -55,6 +55,7 @@ public class IndexAcqFreqDaoImpl {
 				iafr.setLevel1(map.get("level1").toString());
 				iafr.setLevel2(map.get("level2").toString());
 				iafr.setLevel3(map.get("level3").toString());
+				iafr.setIndexNo(map.get("indexNo").toString());
 				result.add(iafr);
 			}
 		}

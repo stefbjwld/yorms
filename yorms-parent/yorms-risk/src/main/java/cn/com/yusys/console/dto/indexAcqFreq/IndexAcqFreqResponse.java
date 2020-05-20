@@ -23,6 +23,7 @@ public class IndexAcqFreqResponse {
 	private String indexAcqFreq;
 	private String indexUnit;
 	private String indexJson;
+	private String indexNo;
 	
 	public Integer getId() {
 		return id;
@@ -110,6 +111,14 @@ public class IndexAcqFreqResponse {
 	
 	public void setIndexJson(String indexJson) {
 		this.indexJson = indexJson;
+	}
+	
+	public String getIndexNo() {
+		return indexNo;
+	}
+	
+	public void setIndexNo(String indexNo) {
+		this.indexNo = indexNo;
 	}
 	
 }
