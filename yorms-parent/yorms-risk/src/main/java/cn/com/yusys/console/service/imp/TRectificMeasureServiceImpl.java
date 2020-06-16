@@ -53,12 +53,6 @@ public class TRectificMeasureServiceImpl implements TRectificMeasureService {
 				if (StringUtils.isNotEmpty(tm.getRectificCooperatDept())) {
 					predicates.add(cb.equal(root.get("rectificCooperatDept"), tm.getRectificCooperatDept()));
 				}
-				if (StringUtils.isNotEmpty(tm.getRectificStatus())) {
-					predicates.add(cb.equal(root.get("rectificStatus"), tm.getRectificStatus()));
-				}
-				if (StringUtils.isNotEmpty(tm.getRectificType())) {
-					predicates.add(cb.equal(root.get("rectificType"), tm.getRectificType()));
-				}
 				return cb.and(predicates.toArray(new Predicate[predicates.size()]));
 			}
 		};
